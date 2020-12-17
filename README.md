@@ -1,1 +1,2 @@
 # treinamento
+print()
