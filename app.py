@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
@@ -16,7 +16,7 @@ obras = [
         "autor":"Pablo Neruda"
     },
     {
-        "titulo":"Poemas de Álvaro de Campos",
+        "titulo":"Poemas de Alvaro de Campos",
         "editora":"L&PM",
         "foto":"https://images-na.ssl-images-amazon.com/images/I/41s-htM5VwL._SX299_BO1,204,203,200_.jpg",
         "autor":"Fernando Pessoa"
@@ -25,6 +25,15 @@ obras = [
 @app.route("/obras", methods=["GET"])
 def home():
     return jsonify(obras), 200
+
+
+@app.route("/obras", methods=['POST'])
+def add():
+    titulo = request.args.get('titulo')
+    autor = request.args.get('autor')
+    editora = request.args.get('editora')
+    obras.append({'titulo':titulo,'autor': autor, 'editora': editora})
+    return "Obra adicionada com sucesso!", 200
 
 
 if __name__ == "__main__":
