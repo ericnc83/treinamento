@@ -5,10 +5,11 @@ import sqlite3
 app = Flask(__name__)
 
 conn = sqlite3.connect('database.db')
-print ("Banco de dados aberto com sucesso!");
+print ("Banco de dados aberto com sucesso!")
 
 conn.execute('CREATE TABLE IF NOT EXISTS obras (titulo TEXT, editora TEXT, foto TEXT, autor TEXT)')
-print ("Tabela criada com sucesso!");
+conn.commit()
+print ("Tabela criada com sucesso!")
 conn.close()
 
 obras = [
@@ -38,7 +39,8 @@ for dados in obras:
     print ("Banco de dados aberto com sucesso!")
     insert = f'INSERT INTO obras (titulo, editora, foto, autor) VALUES ("{dados.get("titulo")}", "{dados.get("editora")}", "{dados.get("foto")}", "{dados.get("autor")}")' # .get mesma coisa que {dados["titulo"]}
     print(insert)
-    conn.execute(insert) 
+    conn.execute(insert)
+    conn.commit() 
     print ("Dados adicionados com sucesso!")
     conn.close()
 
