@@ -7,25 +7,28 @@ app = Flask(__name__)
 conn = sqlite3.connect('database.db')
 print ("Banco de dados aberto com sucesso!")
 
-conn.execute('CREATE TABLE IF NOT EXISTS obras (titulo TEXT, editora TEXT, foto TEXT, autor TEXT)')
+conn.execute('CREATE TABLE IF NOT EXISTS obras (ID INT, Titulo TEXT, Editora TEXT, Foto TEXT, Autor TEXT)')
 conn.commit()
 print ("Tabela criada com sucesso!")
 conn.close()
 
 obras = [
-    {
+    {   
+        "id": 1,
         "titulo":"O Silmarillion",
         "editora":"HarperCollins",
         "foto":"https://images-na.ssl-images-amazon.com/images/I/51aEcyyb3xL._SX331_BO1,204,203,200_.jpg",
         "autor":"J. R. R. Tolkien"
     },
-    {
+    {   
+        "id": 2,
         "titulo":"Cem sonetos de amor",
         "editora":"L&PM",
         "foto":"https://images-na.ssl-images-amazon.com/images/I/41F27-HPN4L._SX297_BO1,204,203,200_.jpg",
         "autor":"Pablo Neruda"
     },
-    {
+    {   
+        "id": 3,
         "titulo":"Poemas de Alvaro de Campos",
         "editora":"L&PM",
         "foto":"https://images-na.ssl-images-amazon.com/images/I/41s-htM5VwL._SX299_BO1,204,203,200_.jpg",
@@ -37,7 +40,7 @@ for dados in obras:
     
     conn = sqlite3.connect('database.db')
     print ("Banco de dados aberto com sucesso!")
-    insert = f'INSERT INTO obras (titulo, editora, foto, autor) VALUES ("{dados.get("titulo")}", "{dados.get("editora")}", "{dados.get("foto")}", "{dados.get("autor")}")' # .get mesma coisa que {dados["titulo"]}
+    insert = f'INSERT INTO obras (ID, Titulo, Editora, Foto, Autor) VALUES ("{dados.get("id")}", "{dados.get("titulo")}", "{dados.get("editora")}", "{dados.get("foto")}", "{dados.get("autor")}")' # .get mesma coisa que {dados["titulo"]}
     print(insert)
     conn.execute(insert)
     conn.commit() 
